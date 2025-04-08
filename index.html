@@ -87,8 +87,6 @@
       <input type="text" id="qiAlternate" name="qiAlternate" />
     </div>
 
-    <!-- Additional sections (Employees, Responders, Equipment, etc.) can be added here -->
-
     <div class="section">
       <label for="additionalComments">Additional Comments</label>
       <textarea id="additionalComments" name="additionalComments"></textarea>
@@ -96,48 +94,48 @@
 
     <input type="submit" value="Submit" />
   </form>
+
   <script>
-  document.getElementById('icpForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    
-    const form = e.target;
-    const data = {
-      companyName: form.companyName.value,
-      facilityAddress: form.facilityAddress.value,
-      facilityLatLong: form.facilityLatLong.value,
-      facilityPhone: form.facilityPhone.value,
-      startDate: form.startDate.value,
-      sicCode: form.sicCode.value,
-      naicsCode: form.naicsCode.value,
-      ownerName: form.ownerName.value,
-      ownerPhone: form.ownerPhone.value,
-      operatorName: form.operatorName.value,
-      operatorPhone: form.operatorPhone.value,
-      qiName: form.qiName.value,
-      qiAddress: form.qiAddress.value,
-      qiAlternate: form.qiAlternate.value,
-      additionalComments: form.additionalComments.value
-    };
+    document.getElementById('icpForm').addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    fetch("https://script.google.com/macros/s/AKfycbx6qrksF39gD_yy_GHJIMe6P5j6cJZVv9JwmHjA3G9zjL-E-VEXEifaGkoMH-HBl0hlYw/exec", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(response => {
-      if (response.ok) {
-        alert("Form submitted successfully!");
-        form.reset();
-      } else {
-        alert("Error submitting form.");
-      }
-    }).catch(error => {
-      console.error("Error:", error);
-      alert("Submission failed.");
+      const form = e.target;
+      const data = {
+        companyName: form.companyName.value,
+        facilityAddress: form.facilityAddress.value,
+        facilityLatLong: form.facilityLatLong.value,
+        facilityPhone: form.facilityPhone.value,
+        startDate: form.startDate.value,
+        sicCode: form.sicCode.value,
+        naicsCode: form.naicsCode.value,
+        ownerName: form.ownerName.value,
+        ownerPhone: form.ownerPhone.value,
+        operatorName: form.operatorName.value,
+        operatorPhone: form.operatorPhone.value,
+        qiName: form.qiName.value,
+        qiAddress: form.qiAddress.value,
+        qiAlternate: form.qiAlternate.value,
+        additionalComments: form.additionalComments.value
+      };
+
+      fetch("YOUR_WEB_APP_URL", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(response => {
+        if (response.ok) {
+          alert("Form submitted successfully!");
+          form.reset();
+        } else {
+          alert("Error submitting form.");
+        }
+      }).catch(error => {
+        console.error("Error:", error);
+        alert("Submission failed.");
+      });
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
