@@ -118,13 +118,26 @@
       additionalComments: form.additionalComments.value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbx6qrksF39gD_yy_GHJIMe6P5j6cJZVv9JwmHjA3G9zjL-E-VEXEifaGkoMH-HBl0hlYw/exec", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
+    fetch("https://corsproxy.io/?" + encodeURIComponent("https://script.google.com/macros/s/AKfycbyzPJpsLSVncbI_jgtuw6AtOSEx17tiKGuPspQ5Ai48oPn-9D9JCM0krO9wEzI1CVErmQ/exec"), {
+  method: "POST",
+  body: JSON.stringify(data),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(response => response.json())
+.then(result => {
+  if (result.success) {
+    alert("Form submitted successfully!");
+    form.reset();
+  } else {
+    alert("Submission failed: " + result.error);
+  }
+})
+.catch(error => {
+  console.error("Fetch error:", error);
+  alert("Submission failed: " + error.message);
+});
     .then(response => {
       if (response.ok) {
         alert("Form submitted successfully!");
